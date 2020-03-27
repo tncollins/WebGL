@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+varying vec4 fColor;
+
+uniform mat4 modelView;
+    
+
+void main() 
+{
+    gl_PointSize = 10.0;
+    gl_Position = modelView*vPosition;
+    fColor = vColor;
+} 
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+varying vec4 fColor;
+
+void
+main()
+{
+    gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="createCube.js"></script>
+<script type="text/javascript" src="spinningCube.js"></script>
+
+<body>        
+<canvas id="gl-canvas" width="400" height="400">>
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+<br/>
+Click canvas to add a cube<br/>
+<button id= "xButton">Rotate X</button>
+<button id= "yButton">Rotate Y</button>
+<button id= "zButton">Rotate Z</button>
+<button id= "rButton">Rotate Random Axis</button>
+<div>
+    scale cube 10% <input id="slider" type="range"
+     min=".1" max="1" step=".1" value=".1" />
+     100%
+</div>
+
+<div style="font-family:verdana";>
+    <h1> CSE 470 HW#2: Spinning Cubes</h1>
+    <strong>Author: </strong>Taylor Collins
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp        
+    <strong>Date: </strong>February 2020</br>
+    <strong>Description: </strong></br>This program allows user to add a rotating cube to canvas.
+    </br>
+    <strong>Functionality: </strong></br>
+    Pressing the Rotate X,Rotate Y,Rotate Z buttons changes the axis of rotation to the X,Y or Z axis respectively for the cubes.</br>
+    Rotate random axis, sets the values in the rotation function to a random value for x, y, and z.<br/>
+    The slider scales the cubes to a certain percentage of the model.
+    </br>
+    <strong>Resources: </strong>Class example code </br>
+    </div>
+</body>
+</html>

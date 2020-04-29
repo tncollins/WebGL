@@ -1,0 +1,159 @@
+<html>
+
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+}
+</style>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform vec4 color;
+
+attribute  vec2 vTexCoord;
+varying vec2 fTexCoord;
+
+varying vec4 fcolor;
+
+void main() 
+{
+    fcolor = color;
+    fTexCoord = vTexCoord;
+    gl_Position = projectionMatrix * modelViewMatrix * vPosition;
+} 
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+varying vec4 fcolor;
+varying  vec2 fTexCoord;
+
+uniform sampler2D Tex0;
+uniform sampler2D Tex1;
+
+void main()
+{
+    /*gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); */
+    //gl_FragColor = fcolor;
+    gl_FragColor = fcolor*(texture2D(Tex0, fTexCoord)*texture2D(Tex1, fTexCoord));
+
+}
+</script>
+
+
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/InitShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="Collins_Figure.js"></script>
+
+</head>
+<body>
+ <table>
+ <tr>
+ <td>
+<div id="slider0">
+torso angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+ 
+<div id="slider10">
+head2 angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+
+<div id="slider1">
+head1 angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+
+ 
+<div id="slider2">
+left upper arm angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+ 
+<div id="slider3">
+left lower arm angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+
+</td>
+<td>
+
+<div id="slider4">
+right upper arm angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+<div id="slider5">
+right lower arm angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+ 
+<div id="slider6">
+left upper leg angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+<div id="slider7">
+left lower leg angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+<div id="slider8">
+right upper leg angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+
+<div id="slider9">
+right lower leg angle -180 <input id="slide" type="range"
+ min="-180" max="180" step="10" value="0"
+  />
+ 180
+</div><br/>
+</td>
+</tr>
+</table>
+
+<button id ="play"> play/pause music</button>
+ 
+
+
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesnt support the HTML5 canvas element
+</canvas>
+
+<audio id ="song">
+    <source src = "techno.wav" type= "audio/wav">
+</audio>
+
+</body>
+</html>
